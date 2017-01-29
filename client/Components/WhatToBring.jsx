@@ -20,15 +20,15 @@ class WhatToBring extends React.Component {
   }
 
   fetchItems() {
-      //The event name is passed along to the server via query parameters 
+    //The event name is passed along to the server via query parameters 
     //so that we can display the itemlist associated with a specific event
-    var eventParam = this.props.featuredEvent.name.split(' ').join('_');
+    var eventId = this.props.featuredEvent.id;
     var successHandler = function(data) {
       this.setState({itemList: data});
     };
     $.ajax({
       method: 'GET',
-      url: '/itemList?eventName=' + eventParam,
+      url: `/events/${eventId}/itemList`,
       success: successHandler.bind(this)
     });
   }
@@ -44,10 +44,10 @@ class WhatToBring extends React.Component {
     var successHandler = function(data) {
       this.fetchItems();
     };
-    var eventParam = this.props.featuredEvent.name.split(' ').join('_');
+    var eventId = this.props.featuredEvent.id;
     $.ajax({
       method: 'POST',
-      url: '/itemList?eventName=' + eventParam,
+      url: `/events/${eventId}/itemList`,
       data: JSON.stringify(item),
       contentType: 'application/json',
       success: successHandler.bind(this)
@@ -100,7 +100,7 @@ class WhatToBring extends React.Component {
             <tr>
               <th>Owner</th>
               <th>Item</th>
-              <th>Cost</th>
+              <th>Cost ($)</th>
             </tr>
           </thead>
           <tbody>
