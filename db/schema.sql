@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `photos`;
 CREATE TABLE `photos` (
  `id` INTEGER AUTO_INCREMENT,
  `url` VARCHAR(250),
- `event` INTEGER,
+ `eventId` INTEGER,
  `createdAt` VARCHAR(60),
  `updatedAt` VARCHAR(60),
  PRIMARY KEY (`id`)
@@ -78,7 +78,7 @@ CREATE TABLE `photos` (
 
 ALTER TABLE `itemlists` ADD FOREIGN KEY (eventId) REFERENCES `events` (`id`);
 ALTER TABLE `reminders` ADD FOREIGN KEY (eventId) REFERENCES `events` (`id`);
-ALTER TABLE `photos` ADD FOREIGN KEY (event) REFERENCES `events` (`id`);
+ALTER TABLE `photos` ADD FOREIGN KEY (eventId) REFERENCES `events` (`id`);
 
 -- ---
 -- Table Properties
