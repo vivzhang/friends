@@ -15,12 +15,11 @@ class App extends React.Component {
     //sends a get request to the server to populate the eventList array in this component's state,
     //which gets passed as a prop into the Eventlist component
     var successHandler = function(data) {
-      console.log(data);
       this.setState({eventList: data});
     };
     $.ajax({
       method: 'GET',
-      url: '/eventTable',
+      url: '/events',
       success: successHandler.bind(this)
     });
   }

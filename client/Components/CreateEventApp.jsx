@@ -27,17 +27,17 @@ class CreateEventApp extends React.Component {
   handleEventSubmit(event) {
     //sends a post request with the event data to the server, which will enter the event into
     //the eventTable
+    event.preventDefault();
     var successHandler = function() {
       $('#msg').text('event successfully posted');
     };
     $.ajax({
       method: 'POST',
-      url: '/eventTable',
+      url: '/events',
       contentType: 'application/json',
       data: JSON.stringify(this.state),
       success: successHandler.bind(this)
     });
-    event.preventDefault();
   } 
   render() {
     return (

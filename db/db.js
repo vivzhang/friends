@@ -11,7 +11,7 @@ var sequelize = new Sequelize('gitgreat', 'root', '', {
   host: 'localhost', dialect: 'mysql'
 });
 
-var EventTable = sequelize.define('events', {
+var Events = sequelize.define('events', {
   name: {
     type: Sequelize.STRING
   },
@@ -23,7 +23,7 @@ var EventTable = sequelize.define('events', {
   }
 });
 
-var ItemListTable = sequelize.define('itemlists', {
+var ItemLists = sequelize.define('itemlists', {
   item: {
     type: Sequelize.STRING
   },
@@ -35,7 +35,7 @@ var ItemListTable = sequelize.define('itemlists', {
   },
 });
 
-var ReminderTable = sequelize.define('reminders', {
+var Reminders = sequelize.define('reminders', {
   phoneNumber: {
     type: Sequelize.INTEGER
   },
@@ -47,9 +47,16 @@ var ReminderTable = sequelize.define('reminders', {
   },
 });
 
+var Photos = sequelize.define('photos', {
+  url: {
+    type: Sequelize.STRING
+  }
+});
+
 //Create associations such that ItemListTable and ReminderTable contain eventId
-ItemListTable.belongsTo(EventTable);
-ReminderTable.belongsTo(EventTable);
+ItemLists.belongsTo(Events);
+Reminders.belongsTo(Events);
+Photos.belongsTo(Events);
 
 sequelize
   .authenticate()
@@ -60,14 +67,9 @@ sequelize
     console.log('Unable to connect to the database:', err);
   });
 
-var PhotosTable = sequelize.define('photos', {
- url: {
-   type: Sequelize.STRING
- }
-});
 
 
-module.exports.PhotosTable = PhotosTable;
-module.exports.EventTable = EventTable;
-module.exports.ItemListTable = ItemListTable;    
-module.exports.ReminderTable = ReminderTable;
+module.exports.Photos = Photos;
+module.exports.Events = Events;
+module.exports.ItemLists = ItemLists;    
+module.exports.Reminders = Reminders;
